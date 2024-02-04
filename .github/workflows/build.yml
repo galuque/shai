@@ -29,7 +29,6 @@ jobs:
         with:
           java-version: "21.0.2"
           distribution: "graalvm"
-          components: "native-image"
           # Set it to secrets.GITHUB_TOKEN to increase rate limits when accessing the GitHub API. Defaults to github.token.
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
