@@ -46,7 +46,7 @@ jobs:
         id: shai-version
         run: |
           SHAI_VERSION=$(clojure -T:build print-version)
-          echo "##[set-output name=version;]${SHAI_VERSION}"
+          echo "version=${SHAI_VERSION}" >> $GITHUB_OUTPUT
 
       - name: Build Uberjar
         run: clojure -T:build uber
