@@ -1,0 +1,62 @@
+name: build
+
+on:
+  push:
+    paths-ignore:
+      - "**.md"
+    branches: ["main"]
+  pull_request:
+    paths-ignore:
+      - "**.md"
+    branches: ["main"]
+
+jobs:
+  native:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
+
+      - name: Cache Deps
+        uses: actions/cache@v4.0.0
+        with:
+          path: ~/.m2/repository
+          key: linux-${{ hashFiles('deps.edn') }}
+          restore-keys: linux-
+
+      - name: Setup GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: "21.0.2"
+          distribution: "graalvm"
+          components: "native-image"
+          # Set it to secrets.GITHUB_TOKEN to increase rate limits when accessing the GitHub API. Defaults to github.token.
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Clojure CLI
+        uses: DeLaGuardo/setup-clojure@12.3
+        with:
+          cli: 1.11.1.1435
+
+      - name: Install Build Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install build-essential zlib1g-dev
+    
+      - name: Shai Version
+        id: shai-version
+        run: |
+          SHAI_VERSION=$(clojure -T:build print-version)
+          echo "##[set-output name=version;]${SHAI_VERSION}"
+
+      - name: Build Uberjar
+        run: clojure -T:build uber
+
+      - name: Build Native Image Executable
+        run: bash native.sh
+
+      - name: Upload Executable
+        uses: actions/upload-artifact@v4.3.0
+        with:
+          name: shai-${{ steps.shai-version.outputs.version }}-linux-static-amd64
+          path: target/shai
