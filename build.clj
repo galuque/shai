@@ -7,6 +7,10 @@
 (def basis (b/create-basis {:project "deps.edn"}))
 (def uber-file (format "target/%s-%s-standalone.jar" (name app) version))
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
+(defn print-version [_]
+  (println version))
+
 (defn clean [_]
   (b/delete {:path "target"}))
 
