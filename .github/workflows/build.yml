@@ -59,3 +59,17 @@ jobs:
         with:
           name: shai-${{ steps.shai-version.outputs.version }}-linux-static-amd64
           path: target/shai
+      
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: github.event.pull_request.merged == true
+        env:
+          SHAI_VERSION: ${{ steps.shai-version.outputs.version }}
+        with:
+          files: target/shai
+          tag_name: v${{ steps.shai-version.outputs.version }}
+          body: |
+            Shai v${SHAI_VERSION} release
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
