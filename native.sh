@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 native-image --report-unsupported-elements-at-runtime \
                  --no-fallback \
                  --static \
@@ -10,5 +12,5 @@ native-image --report-unsupported-elements-at-runtime \
                  --enable-url-protocols=http,https \
                  -march=native \
                  --strict-image-heap \
-                 -J-Xmx4G \
+                 -J-Xmx4500m \
                  --gc=epsilon
