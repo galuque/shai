@@ -20,7 +20,6 @@
   (let [headers (merge {"x-goog-api-key" (get-api-key)} headers)]
     (http/get (str api-url endpoint "/") {:headers headers})))
 
-
 (defn- api-post
   ([endpoint data]
    (api-post endpoint data {:stream false}))
@@ -41,10 +40,10 @@
   (let [response (api-get "models")]
     (json/read-str (:body response) {:key-fn keyword})))
 
-(def generation-config {:temperature 0.4
-                        :maxOutputTokens 100
-                        :topP 1
-                        :topK 1})
+(def generation-config {:temperature 0.5
+                        :maxOutputTokens 200
+                        :topP 0.9
+                        :topK 3})
 
 (defn- get-text [response]
   (-> response :candidates (nth 0) :content :parts (nth 0) :text))
