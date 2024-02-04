@@ -1,0 +1,7 @@
+target/
+.calva/
+.clj-kondo/
+.cpcache/
+.lsp/
+.portal/
+.nrepl-port
