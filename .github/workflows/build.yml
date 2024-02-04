@@ -46,6 +46,7 @@ jobs:
         id: shai-version
         run: |
           SHAI_VERSION=$(clojure -T:build print-version)
+          echo "Shai version: ${SHAI_VERSION}"
           echo "version=${SHAI_VERSION}" >> $GITHUB_OUTPUT
 
       - name: Build Uberjar
@@ -62,7 +63,7 @@ jobs:
       
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: github.event.pull_request.merged == true
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           SHAI_VERSION: ${{ steps.shai-version.outputs.version }}
         with:
