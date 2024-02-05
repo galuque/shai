@@ -10,7 +10,7 @@ native-image --report-unsupported-elements-at-runtime \
                  -H:+ReportExceptionStackTraces \
                  --features=clj_easy.graal_build_time.InitClojureClasses \
                  --enable-url-protocols=http,https \
-                 -march=native \
+                 -march=compatibility \
                  --strict-image-heap \
                  -J-Xmx4500m \
                  --gc=epsilon
