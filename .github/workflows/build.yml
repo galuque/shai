@@ -34,6 +34,7 @@ jobs:
         with:
           java-version: "21.0.2"
           distribution: "graalvm"
+          native-image-musl: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Clojure CLI
