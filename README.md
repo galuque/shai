@@ -11,7 +11,7 @@ This tools is just a toy project, and always remember to be careful when running
 
 Only you are responsible for the commands you run on your system.
 
-## Getting Started
+## Getting the CLI tool
 
 ### Prerequisites
 
@@ -30,12 +30,30 @@ echo "export GOOGLE_AI_STUDIO_API_KEY=<your API key>" >> ~/.bashrc
 source ~/.bashrc
 ```
 
+### Downloading the tool from GitHub
+
+```bash
+curl -LO https://github.com/galuque/shai/releases/download/v0.1.25/shai-0.1.25-linux-static-amd64 > shai
+chmod +x shai
+./shai <query>
+
+# or move the file to a directory in your PATH to make it available from anywhere
+sudo mv shai /usr/local/bin
+```
+
+## Running the tool from source
+
+Clone the repository and navigate to the project directory:
+
+```bash
+git clone https://github.com/galuque/shai.git
+cd shai
+```
+
 Also, you need to have the following installed:
 - [Clojure CLI](https://clojure.org/guides/getting_started)
 - [Babashka](https://babashka.org/) (Optional, for running the tool with babashka)
 - [GraalVM](https://www.graalvm.org/) (Optional, for building native executables with the `native-image` command)
-
-## Running the tool
 
 ### Clojure
 
