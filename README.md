@@ -33,7 +33,7 @@ source ~/.bashrc
 ### Downloading the tool from GitHub
 
 ```bash
-curl -LO https://github.com/galuque/shai/releases/download/v0.1.25/shai-0.1.25-linux-static-amd64 > shai
+curl -LO https://github.com/galuque/shai/releases/download/v0.1.29/shai-0.1.29-linux-static-amd64 > shai
 chmod +x shai
 ./shai <query>
 
