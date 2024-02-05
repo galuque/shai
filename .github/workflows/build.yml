@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Cache Deps
         uses: actions/cache@v4.0.0
@@ -32,7 +34,6 @@ jobs:
         with:
           java-version: "21.0.2"
           distribution: "graalvm"
-          # Set it to secrets.GITHUB_TOKEN to increase rate limits when accessing the GitHub API. Defaults to github.token.
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Clojure CLI
