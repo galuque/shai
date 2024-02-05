@@ -4,7 +4,6 @@ set -x
 
 native-image --report-unsupported-elements-at-runtime \
                  --no-fallback \
-                 --static \
                  -jar target/*.jar \
                  -o target/shai \
                  -H:+ReportExceptionStackTraces \
