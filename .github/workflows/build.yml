@@ -61,6 +61,8 @@ jobs:
         run: clojure -T:build uber
 
       - name: Build Native Image Executable
+        env:
+          SHAI_STATIC: "true"
         run: bash native.sh
 
       - name: Upload Executable
